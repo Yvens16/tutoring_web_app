@@ -11,10 +11,24 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/process-signup", (req, res, next) => {
-  const { firstname, lastname, username, email, originalPassword } = req.body;
+  const {
+    lastname,
+    firstname,
+    phoneparent,
+    phonestudent,
+    email,
+    originalPassword
+  } = req.body;
   const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
 
-  User.create({ firstname, lastname, username, email, encryptedPassword })
+  User.create({
+    lastname,
+    firstname,
+    phoneparent,
+    phonestudent,
+    email,
+    encryptedPassword
+  })
     .then(userDoc => {
       req.flash("success", "Sign up SUCCESS");
       res.redirect("/");
