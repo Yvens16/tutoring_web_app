@@ -9,8 +9,9 @@ const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
+const passportSetup = require("./config/passport/passport-setup.js");
 
 mongoose
   .connect(
@@ -54,9 +55,34 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
+// enables our app to keep track of sessions
+app.use(
+  session({
+    // "secret"
+    secret: "secret should be different for every app",
+    // "saveUninitialized" and "resave" are here just to avoid messages
+    saveUninitialized: true,
+    resave: true,
+    // use connect-mongo to store session information inside mongoDB
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+  })
+);
+
+// MUST come after "app.use(session())"
+passportSetup(app);
+
+// enables flash messages in our routes with "req.flash()"
+app.use(flash());
+
+app.use((req, res, next) => {
+  // make flash messages accessible inside hbs files as "messages"
+  res.locals.messages = req.flash();
+  // you need this or your app won't work
+  next();
+});
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "Tutoring Web App";
 
 const index = require("./routes/index");
 app.use("/", index);
