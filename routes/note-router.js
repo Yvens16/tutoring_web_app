@@ -1,10 +1,11 @@
 const express = require("express");
 
 const Note = require("../models/note-model.js");
+const User = require("../models/user-model.js");
 
 const router = express.Router();
 
-router.get("/my-notes", (req, res, next) => {
+router.get("/note", (req, res, next) => {
   if (!req.user) {
     req.flash("error", "Tu dois te connecter pour voir tes cours 😓");
     res.redirect("/login");
@@ -36,7 +37,65 @@ router.post("/process-note", (req, res, next) => {
   Note.create({ title, topic, noteCours, student })
     .then(noteDoc => {
       req.flash("success", "Cours ajouté avec succès 😍");
-      res.redirect("/my-notes");
+      res.redirect("/note");
+    })
+    .catch(err => next(err));
+});
+
+router.get("/note/:noteId", (req, res, next) => {
+  // get the ID from the URL
+  const { noteId } = req.params;
+
+  Note.findById(noteId)
+    .populate("user")
+    .then(noteDoc => {
+      // send the database results (1) to the template as "noteItem"
+      res.locals.noteItem = noteDoc;
+      res.render("note-views/note-details.hbs");
+    })
+    .catch(err => next(err));
+});
+
+router.get("/note/:noteId/edit", (req, res, next) => {
+  // get the ID from the URL
+  const { noteId } = req.params;
+
+  Note.findById(noteId)
+    .then(noteDoc => {
+      // send the database results (1) to the template as "noteItem"
+      res.locals.noteItem = noteDoc;
+      res.render("note-views/note-edit.hbs");
+    })
+    .catch(err => next(err));
+});
+
+router.post("/note/:noteId/process-edit", (req, res, next) => {
+  const { noteId } = req.params;
+  const { topic, title, noteCours } = req.body;
+
+  Note.findByIdAndUpdate(
+    noteId, // which document(s)?
+    { $set: { topic, title, noteCours } }, // what changes?
+    { runVzlidators: true } // additionnal settings
+  )
+    .then(noteBook => {
+      // redirect if it's successful to avoid duplicating the submission
+      // redirect ONLY to URLs - "/books/$bookId" instead of "book-list.hbs"
+      req.flash("success", "Ton cours a bien été modifié");
+      res.redirect(`/note/${noteId}`);
+    })
+    .catch(err => next(err));
+});
+
+router.get("/note/:noteId/delete", (req, res, next) => {
+  const { noteId } = req.params;
+
+  Note.findByIdAndRemove(noteId)
+    .then(noteBook => {
+      // redirect if it's successful to avoid duplicating the submission
+      // redirect ONLY to URLs - "/note" instead of "note-list.hbs"
+      req.flash("success", "Ton cours a bien été supprimé");
+      res.redirect("/note");
     })
     .catch(err => next(err));
 });
