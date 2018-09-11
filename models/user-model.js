@@ -7,16 +7,16 @@ const userSchema = new Schema(
     lastname: { type: String, required: true },
     firstname: { type: String, required: true },
     phoneparent: {
-      type: Number,
+      type: String,
       required: true,
       unique: true,
-      match: /^((\+|00)33\s?|0)[67](\s?\d{2}){4}$/
+      match: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/
     },
     phonestudent: {
-      type: Number,
+      type: String,
       required: true,
       unique: true,
-      match: /^((\+|00)33\s?|0)[67](\s?\d{2}){4}$/
+      match: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/
     },
     email: { type: String, required: true, unique: true, match: /^.+@.+\..+$/ },
     encryptedPassword: { type: String }
