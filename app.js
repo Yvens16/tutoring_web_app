@@ -12,6 +12,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 const passportSetup = require("./config/passport/passport-setup.js");
+const nodemailer = require('nodemailer');
 
 mongoose
   .connect(

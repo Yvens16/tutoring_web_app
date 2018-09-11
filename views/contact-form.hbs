@@ -1,1 +1,33 @@
 <h2>Vous pouvez nous contacter</h2>
+
+<h1 id="msg">{{msg}}</h1>
+
+
+<form action="/process-contact" method="POST">
+  <label for="">
+    Name:
+    <input type="text" name="name" placeholder="Your name">
+  </label>
+  <br>
+
+  <label for="">
+    Email:
+    <input type="text" name="email" placeholder="Your email">
+  </label>
+  <br>
+
+  <label for="">
+    Message:
+    <textarea name="message" rows="5"></textarea>
+  </label>
+  <br>
+  <button type="submit">Send you email</button>
+</form>
+
+<h2>Ou réservez un appel pour nous contacter directement</h2>
+
+<!-- Début de widget en ligne Calendly -->
+<div class="calendly-inline-widget" data-url="https://calendly.com/fabunotutorat/appel-de-15-min" style="min-width:320px;height:580px;"></div>
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
+<!-- Fin de widget en ligne Calendly -->
+</div>
