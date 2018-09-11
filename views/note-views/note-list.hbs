@@ -1,0 +1,18 @@
+<h2>Mes cours</h2>
+
+{{> flash_messages}}
+
+<a href="/note/add">Ajouter un nouveau cours</a>
+
+<ul>
+  {{#each noteArray}}
+  <li>
+    <h4>{{this.topic}}</h4>
+    <p>{{this.title}}</p>
+    <a href="#">Afficher le cours</a>
+  </li>
+  {{else}}
+  <p>Tu n'as pas encore créé de cours.</p>
+  <a href="/note/add">Ajoute ton premier cours</a>
+  {{/each}}
+</ul>
