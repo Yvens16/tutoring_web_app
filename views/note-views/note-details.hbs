@@ -1,0 +1,13 @@
+{{> flash_messages}}
+
+<h2>{{noteItem.topic}}</h2>
+
+<h3>{{noteItem.title}}</h3>
+
+<p>{{noteItem.noteCours}}</p>
+
+<p>Ajouté le : {{noteItem.createdAt}}</p>
+
+<a href="/note/{{noteItem._id}}/edit">Modifier ce cours</a>
+<br>
+<a href="/note/{{noteItem._id}}/delete">Supprimer ce cours</a>
