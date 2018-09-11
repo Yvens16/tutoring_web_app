@@ -1,0 +1,31 @@
+<h2>Modifier mon compte</h2>
+
+<form action="/process-settings" method="POST">
+  <label>
+    Nom:
+    <input type="text" name="lastname" value="{{currentUser.lastname}}" placeholder="Nom">
+  </label>
+  <br>
+  <label>
+    Prénom:
+    <input type="text" name="firstname" value="{{currentUser.firstname}}" placeholder="Prénom">
+  </label>
+  <br>
+  <label>
+    N° de portable du tuteur:
+    <input type="text" name="phoneparent" value="{{currentUser.phoneparent}}" placeholder="N° d'un parent ou responsable légal">
+  </label>
+  <br>
+  <label>
+    N° de téléphone de l'élève:
+    <input type="text" name="phonestudent" value="{{currentUser.phonestudent}}" placeholder="N° de l'élève">
+  </label>
+  <br>
+  <label>
+    Adresse email:
+    <input type="email" name="email" value="{{currentUser.email}}" placeholder="Email d'un parent ou responsable légal">
+  </label>
+  <br>
+
+  <button>Créer un compte</button>
+</form>
