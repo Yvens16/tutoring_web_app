@@ -1,6 +1,6 @@
 <h2>Ajouter un cours</h2>
 
-<form action="/process-note" method="POST">
+<form action="/process-note" method="POST" enctype="multipart/form-data">
   <label>
     Matière:
     <input type="text" name="topic" placeholder="'Maths', 'Français', 'Finance' etc.">
@@ -16,6 +16,11 @@
   <label>
     Notes de cours:
     <textarea name="noteCours" cols="30" rows="10"></textarea>
+  </label>
+
+  <label>
+    Fichier:
+    <input type="file" name="noteFileUpload">
   </label>
 
   <button>Ajouter ce cours</button>

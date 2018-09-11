@@ -2,6 +2,7 @@ const express = require("express");
 
 const Note = require("../models/note-model.js");
 const User = require("../models/user-model.js");
+const fileUploader = require("../config/file-uploader.js");
 
 const router = express.Router();
 
@@ -30,17 +31,26 @@ router.get("/note/add", (req, res, next) => {
   }
 });
 
-router.post("/process-note", (req, res, next) => {
-  const { title, topic, noteCours } = req.body;
-  const student = req.user._id;
+router.post(
+  "/process-note",
+  fileUploader.single("noteFileUpload"),
+  (req, res, next) => {
+    const { title, topic, noteCours } = req.body;
+    const student = req.user._id;
+    let noteFile;
 
-  Note.create({ title, topic, noteCours, student })
-    .then(noteDoc => {
-      req.flash("success", "Cours ajouté avec succès 😍");
-      res.redirect("/note");
-    })
-    .catch(err => next(err));
-});
+    if (req.file) {
+      noteFile = req.file.secure_url;
+    }
+    // res.send(req.file);
+    Note.create({ title, topic, noteCours, noteFile, student })
+      .then(noteDoc => {
+        req.flash("success", "Cours ajouté avec succès 😍");
+        res.redirect("/note");
+      })
+      .catch(err => next(err));
+  }
+);
 
 router.get("/note/:noteId", (req, res, next) => {
   // get the ID from the URL

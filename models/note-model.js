@@ -11,6 +11,9 @@ const noteSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true
+    },
+    noteFile: {
+      type: String
     }
   },
   {

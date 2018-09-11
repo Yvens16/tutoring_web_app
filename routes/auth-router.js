@@ -14,8 +14,8 @@ router.post("/process-signup", (req, res, next) => {
   const {
     lastname,
     firstname,
-    phoneparent,
-    phonestudent,
+    // phoneparent,
+    // phonestudent,
     email,
     originalPassword
   } = req.body;
@@ -24,8 +24,8 @@ router.post("/process-signup", (req, res, next) => {
   User.create({
     lastname,
     firstname,
-    phoneparent,
-    phonestudent,
+    // phoneparent,
+    // phonestudent,
     email,
     encryptedPassword
   })
@@ -72,6 +72,5 @@ router.get("/logout", (req, res, next) => {
   req.flash("success", "Décconnexion réussie");
   res.redirect("/");
 });
-
 
 module.exports = router;
