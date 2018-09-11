@@ -90,4 +90,7 @@ app.use("/", index);
 const authRouter = require("./routes/auth-router.js");
 app.use("/", authRouter);
 
+const noteRouter = require("./routes/note-router.js");
+app.use("/", noteRouter);
+
 module.exports = app;

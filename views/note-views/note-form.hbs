@@ -1,25 +1,22 @@
-
-
-
-
+<h2>Ajouter un cours</h2>
 
 <form action="/process-note" method="POST">
-<label for="">
-  Matière:
-  <input type="text" name="topic" placeholder="Maths ou Français ou Finance etc...">
-</label>
-<br>
+  <label>
+    Matière:
+    <input type="text" name="topic" placeholder="'Maths', 'Français', 'Finance' etc.">
+  </label>
+  <br>
 
-<label for="">
-  Titre de la lesson:
-  <input type="text" name="title" placeholder="Example: La dérivation...">
-</label>
-<br>
+  <label>
+    Titre du cours:
+    <input type="text" name="title" placeholder="Exemple: Théorème de Thalès">
+  </label>
+  <br>
 
-<label for="">
-Ci-gît tes notes:
-<input type="text" name="noteCours" id="">
-</label>
+  <label>
+    Notes de cours:
+    <textarea name="noteCours" cols="30" rows="10"></textarea>
+  </label>
 
-<button type="submit">Créer une note</button>
+  <button>Ajouter ce cours</button>
 </form>
