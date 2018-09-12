@@ -1,3 +1,19 @@
 <h2>Liste des cours de {{userResult.firstname}}</h2>
 
-<h3>{{userResult.title}}</h3>
+{{#each noteResult}}
+<ul>
+  <li>
+    <h3>{{this.title}}</h3>
+
+    <p>{{this.topic}}</p>
+
+    <p>{{this.noteCours}}</p>
+
+    <p><a href="{{this.noteFile}}"><i class="fa fa-cloud" style="font-size:36px;"></i></a> Cliquer pour visualiser le cours</p>
+
+    <p>Ajouté {{this.created}}</p>
+
+    <p>Dernière modification : {{this.updated}}</p>
+  </li>
+</ul>
+{{/each}}

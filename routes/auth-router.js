@@ -1,8 +1,10 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const camelCase = require("camelcase");
 
 const User = require("../models/user-model.js");
+const Note = require("../models/note-model.js");
 
 const router = express.Router();
 
@@ -10,8 +12,14 @@ router.get("/signup", (req, res, next) => {
   res.render("auth-views/signup-form.hbs");
 });
 
+// function toCamelCase(str) {
+//   return str.toLowerCase().replace(/(?:(^.)|(\s+.))/g, function(match) {
+//     return match.charAt(match.length - 1).toUpperCase();
+//   });
+// }
+
 router.post("/process-signup", (req, res, next) => {
-  const {
+  let {
     lastname,
     firstname,
     // phoneparent,
@@ -20,6 +28,8 @@ router.post("/process-signup", (req, res, next) => {
     originalPassword
   } = req.body;
   const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
+  lastname = camelCase(lastname, { pascalCase: true });
+  firstname = camelCase(firstname, { pascalCase: true });
 
   User.create({
     lastname,
@@ -79,11 +89,12 @@ router.get("/search", (req, res, next) => {
 
 router.post("/process-search", (req, res, next) => {
   const { searchItem } = req.body;
+  const searchItemCamelCase = camelCase(searchItem, { pascalCase: true });
 
   User.find({
     $or: [
-      { lastname: searchItem },
-      { firstname: searchItem },
+      { lastname: searchItemCamelCase },
+      { firstname: searchItemCamelCase },
       { email: searchItem }
     ]
   })
@@ -106,7 +117,16 @@ router.get("/user/:userId/details", (req, res, next) => {
   User.findById(userId)
     .then(userDoc => {
       res.locals.userResult = userDoc;
-      res.render("auth-views/search-result.hbs");
+      // res.render("auth-views/search-result.hbs");
+
+      // const { userId } = req.params;
+      Note.find({ student: { $eq: userId } })
+        .then(noteDoc => {
+          res.locals.noteResult = noteDoc;
+          res.render("auth-views/search-result.hbs");
+          console.log(noteDoc);
+        })
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });
