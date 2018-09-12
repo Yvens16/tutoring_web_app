@@ -1,6 +1,8 @@
 <h2>Liste des cours de {{userResult.firstname}}</h2>
 
-{{#each noteResult}}
+{{#unless noteResult}}
+<p>{{userResult.firstname}} n'a pas encore ajouté de cours.</p>
+{{/unless}} {{#each noteResult}}
 <ul>
   <li>
     <h3>{{this.title}}</h3>

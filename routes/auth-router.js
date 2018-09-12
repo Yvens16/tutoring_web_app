@@ -99,12 +99,13 @@ router.post("/process-search", (req, res, next) => {
     ]
   })
     .then(userDoc => {
-      // console.log(userDoc);
+      console.log(userDoc);
       if (!userDoc) {
         req.flash("error", "Aucun élève trouvé");
         res.redirect("/search");
         return;
       } else {
+        console.log(userDoc);
         res.locals.userResult = userDoc;
         res.render("auth-views/user-search.hbs");
       }
