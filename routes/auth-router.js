@@ -95,8 +95,8 @@ router.post("/process-search", (req, res, next) => {
     .then(userDoc => {
       console.log(userDoc);
       if (!userDoc) {
-        req.flash("error", "Aucun élève trouvé");
         res.redirect("/search");
+        req.flash("error", "Aucun élève trouvé");
         return;
       } else {
         console.log(userDoc);

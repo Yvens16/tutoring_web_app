@@ -9,13 +9,13 @@ const userSchema = new Schema(
     phoneparent: {
       type: String,
       // required: true,
-      unique: true,
+      // unique: true,
       match: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/
     },
     phonestudent: {
       type: String,
       // required: true,
-      unique: true,
+      // unique: true,
       match: /^(?:(?:\+|00)33|0)\s*[6-7](?:[\s.-]*\d{2}){4}$/
     },
     email: { type: String, required: true, unique: true, match: /^.+@.+\..+$/ },
