@@ -34,6 +34,7 @@ router.post("/process-settings", (req, res, next) => {
     .catch(err => next(err));
 });
 
+
 /* GET contact page */
 
 router.get("/contact", (req, res, next) => {
@@ -89,5 +90,23 @@ router.post("/process-contact", (req, res, next) => {
     });
   });
 });
+
+//ACCESS LIST OF USER 
+router.get('/search', (req, res, next) => {
+  if (!req.user){
+    req.flash("error", "Tu dois être connecté pour voir les autres utilisateurs");
+    res.redirect('/');
+    return;
+  }
+
+  User.find()
+  .sort({role : 1, createdAt:1})
+  .then(data => {
+    res.locals.userArray = data;
+    res.render("auth-views/users-view");
+  })
+  .catch(err => next(err));
+});
+
 
 module.exports = router;
