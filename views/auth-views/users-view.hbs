@@ -4,6 +4,7 @@
   <label for="">
     chercher un utilisateur:
     <input type="search" name="q">
+    <input type="search" name="q">
     <button>Chercher</button>
   </label>
 </form>
@@ -13,7 +14,7 @@
   {{#each userArray}}
   <li>
     <h4>
-    <a href="/note/:noteId">{{this.firstname}} {{this.lastname}}</a>
+    <a href="/note/{{this._id}}">{{this.firstname}} {{this.lastname}}</a>
     </h4>
   </li>
   {{/each}}

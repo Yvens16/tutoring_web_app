@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const noteSchema = new Schema(
@@ -20,6 +20,11 @@ const noteSchema = new Schema(
     timestamps: true
   }
 );
+
+
+noteSchema.virtual("created").get(function(){
+  return moment(this.createdAt).locale('fr').format('LLLL');
+});
 
 const Note = mongoose.model("Note", noteSchema);
 
