@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -12,16 +12,14 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const flash = require("connect-flash");
 const passportSetup = require("./config/passport/passport-setup.js");
-const nodemailer = require('nodemailer');
-const accountSid = 'AC6daac4567180e9bcd07e51ec01c29676';
-const authToken = '1250540d1e7e24d864cbef283363b2d8';
-const client = require('twilio')(accountSid, authToken);
-
-
+const nodemailer = require("nodemailer");
+const accountSid = "AC6daac4567180e9bcd07e51ec01c29676";
+const authToken = "1250540d1e7e24d864cbef283363b2d8";
+const client = require("twilio")(accountSid, authToken);
 
 mongoose
   .connect(
-    "mongodb://localhost/tutoring-web-app",
+    process.env.MONGODB_URI,
     { useNewUrlParser: true }
   )
   .then(x => {

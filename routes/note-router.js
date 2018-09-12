@@ -3,6 +3,7 @@ const express = require("express");
 const Note = require("../models/note-model.js");
 const User = require("../models/user-model.js");
 const fileUploader = require("../config/file-uploader.js");
+var upperCaseFirst = require("upper-case-first");
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ router.post(
   "/process-note",
   fileUploader.single("noteFileUpload"),
   (req, res, next) => {
-    const { title, topic, noteCours } = req.body;
+    let { title, topic, noteCours } = req.body;
     const student = req.user._id;
     let noteFile;
 
@@ -43,6 +44,8 @@ router.post(
       noteFile = req.file.secure_url;
     }
     // res.send(req.file);
+    title = upperCaseFirst(title);
+    topic = upperCaseFirst(topic);
     Note.create({ title, topic, noteCours, noteFile, student })
       .then(noteDoc => {
         req.flash("success", "Cours ajouté avec succès 😍");

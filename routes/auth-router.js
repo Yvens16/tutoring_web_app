@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-const camelCase = require("camelcase");
+var upperCaseFirst = require("upper-case-first");
 
 const User = require("../models/user-model.js");
 const Note = require("../models/note-model.js");
@@ -11,12 +11,6 @@ const router = express.Router();
 router.get("/signup", (req, res, next) => {
   res.render("auth-views/signup-form.hbs");
 });
-
-// function toCamelCase(str) {
-//   return str.toLowerCase().replace(/(?:(^.)|(\s+.))/g, function(match) {
-//     return match.charAt(match.length - 1).toUpperCase();
-//   });
-// }
 
 router.post("/process-signup", (req, res, next) => {
   let {
@@ -28,8 +22,8 @@ router.post("/process-signup", (req, res, next) => {
     originalPassword
   } = req.body;
   const encryptedPassword = bcrypt.hashSync(originalPassword, 10);
-  lastname = camelCase(lastname, { pascalCase: true });
-  firstname = camelCase(firstname, { pascalCase: true });
+  lastname = upperCaseFirst(lastname, { pascalCase: true });
+  firstname = upperCaseFirst(firstname, { pascalCase: true });
 
   User.create({
     lastname,
@@ -89,7 +83,7 @@ router.get("/search", (req, res, next) => {
 
 router.post("/process-search", (req, res, next) => {
   const { searchItem } = req.body;
-  const searchItemCamelCase = camelCase(searchItem, { pascalCase: true });
+  const searchItemCamelCase = upperCaseFirst(searchItem, { pascalCase: true });
 
   User.find({
     $or: [
