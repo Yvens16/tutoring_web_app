@@ -23,7 +23,11 @@ const noteSchema = new Schema(
 
 
 noteSchema.virtual("created").get(function(){
-  return moment(this.createdAt).locale('fr').format('LLLL');
+  return moment(this.createdAt).locale('fr').fromNow();
+});
+
+noteSchema.virtual("updated").get(function(){
+  return moment(this.updatedAt).locale('fr').fromNow();
 });
 
 const Note = mongoose.model("Note", noteSchema);
