@@ -1,0 +1,22 @@
+<h2>Rechercher un utilisateur</h2>
+
+{{> flash_messages}}
+
+<form action="/process-search" method="POST">
+  <label>
+    Taper un nom, prénom ou email:
+    <input type="search" name="searchItem" placeholder="'Yvens, 'Belaston' ou 'email@exemple.com'">
+    <button>Chercher</button>
+  </label>
+  <br>
+</form>
+
+<ul>
+  {{#each userResult}}
+  <li>
+    <h4>
+      <a href="/user/{{this._id}}/details">{{this.firstname}} {{this.lastname}}</a>
+    </h4>
+  </li>
+  {{/each}}
+</ul>

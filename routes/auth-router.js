@@ -73,4 +73,42 @@ router.get("/logout", (req, res, next) => {
   res.redirect("/");
 });
 
+router.get("/search", (req, res, next) => {
+  res.render("auth-views/user-search.hbs");
+});
+
+router.post("/process-search", (req, res, next) => {
+  const { searchItem } = req.body;
+
+  User.find({
+    $or: [
+      { lastname: searchItem },
+      { firstname: searchItem },
+      { email: searchItem }
+    ]
+  })
+    .then(userDoc => {
+      // console.log(userDoc);
+      if (!userDoc) {
+        req.flash("error", "Aucun élève trouvé");
+        res.redirect("/search");
+        return;
+      } else {
+        res.locals.userResult = userDoc;
+        res.render("auth-views/user-search.hbs");
+      }
+    })
+    .catch(err => next(err));
+});
+
+router.get("/user/:userId/details", (req, res, next) => {
+  const { userId } = req.params;
+  User.findById(userId)
+    .then(userDoc => {
+      res.locals.userResult = userDoc;
+      res.render("auth-views/search-result.hbs");
+    })
+    .catch(err => next(err));
+});
+
 module.exports = router;

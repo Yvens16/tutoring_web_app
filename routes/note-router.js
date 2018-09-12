@@ -86,7 +86,7 @@ router.post("/note/:noteId/process-edit", (req, res, next) => {
   Note.findByIdAndUpdate(
     noteId, // which document(s)?
     { $set: { topic, title, noteCours } }, // what changes?
-    { runVzlidators: true } // additionnal settings
+    { runValidators: true } // additionnal settings
   )
     .then(noteBook => {
       // redirect if it's successful to avoid duplicating the submission
