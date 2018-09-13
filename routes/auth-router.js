@@ -35,14 +35,17 @@ router.post("/process-signup", (req, res, next) => {
   })
     .then(userDoc => {
       req.flash("success", "Inscription réussie");
-      res.redirect("/");
+      req.logIn(userDoc, () => {
+        req.flash("success", "Connexion réussie ✌️");
+        res.redirect("/");
+      });
     })
     .catch(err => next(err));
 });
 
-router.get("/login", (req, res, next) => {
-  res.render("auth-views/login-form.hbs");
-});
+// router.get("/login", (req, res, next) => {
+//   res.render("auth-views/login-form.hbs");
+// });
 
 router.post("/process-login", (req, res, next) => {
   const { email, originalPassword } = req.body;
