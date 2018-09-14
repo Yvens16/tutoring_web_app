@@ -1,8 +1,37 @@
-<h2>Liste des cours de {{userResult.firstname}}</h2>
+<h2 style="color: white; margin-bottom: 40px">Liste des cours de {{userResult.firstname}}</h2>
+
+{{> flash_messages}}
 
 {{#unless noteResult}}
-<p>{{userResult.firstname}} n'a pas encore ajouté de cours.</p>
-{{/unless}} {{#each noteResult}}
+<strong>
+  <p style="color: white">{{userResult.firstname}} n'a pas encore ajouté de cours.</p>
+</strong>
+{{/unless}}
+
+<div class="row">
+  {{#each noteResult}}
+  <div id="grid-list-cours" class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size: 20px">{{this.topic}}</h5>
+        <p class="card-text" style="font-size: 15px; margin-bottom: 0">{{this.title}}</p>
+        <p style="margin-bottom: 0">{{this.noteCours}}</p>
+        <p style="font-size: 15px; margin-bottom: 0"><a href="{{this.noteFile}}" target="_blank"><i class="fa fa-cloud"
+              style="font-size:15px;"></i></a>
+          Visualiser le cours</p>
+        <p style="font-size: 10px; margin-bottom: 0">Ajouté {{this.created}}</p>
+
+        <p style="font-size: 10px; margin-bottom: 0">Dernière modification : {{this.updated}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+<div style="height: 200px"></div>
+
+
+{{!--
+
 <ul>
   <li>
     <h3>{{this.title}}</h3>
@@ -11,11 +40,10 @@
 
     <p>{{this.noteCours}}</p>
 
-    <p><a href="{{this.noteFile}}"><i class="fa fa-cloud" style="font-size:36px;"></i></a> Cliquer pour visualiser le cours</p>
+    <p><a href="{{this.noteFile}}" target="_blank"><i class="fa fa-cloud" style="font-size:36px;"></i></a> Cliquer pour
+      visualiser le cours</p>
 
-    <p>Ajouté {{this.created}}</p>
 
-    <p>Dernière modification : {{this.updated}}</p>
   </li>
 </ul>
-{{/each}}
+{{/each}} --}}

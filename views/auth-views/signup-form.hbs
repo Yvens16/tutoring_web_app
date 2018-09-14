@@ -1,54 +1,106 @@
-<h2>Inscription</h2>
-
-<form action="/process-signup" method="POST">
-  <label>
-    Nom:
-    <input type="text" name="lastname" placeholder="Nom">
-  </label>
-  <br>
-  <label>
-    Prénom:
-    <input type="text" name="firstname" placeholder="Prénom">
-  </label>
-  <br> {{!-- <label>
-    N° de portable du tuteur:
-    <input type="text" name="phoneparent" placeholder="N° d'un parent ou responsable légal">
-  </label>
-  <br> --}} {{!-- <label>
-    N° de téléphone:
-    <input type="text" name="phonestudent" placeholder="N° de l'élève">
-  </label>
-  <br>
-  <label> --}} Adresse email:
-    <input type="email" name="email" placeholder="Email d'un parent ou responsable légal">
-  </label>
-  <br>
-  <label>
-    Mot de passe:
-    <input type="password" name="originalPassword" placeholder="Mot de passe">
-  </label>
-  <br>
-
-  <button>Créer un compte</button>
-</form>
-
-
-<h2>Se connecter</h2>
-
 {{> flash_messages}}
 
-<form action="/process-login" method="POST">
-  <label>
-    Email:
-    <input type="text" name="email" placeholder="Adresse email">
-  </label>
-  <br>
+<div class="top-content">
 
-  <label>
-    Mot de passe:
-    <input type="password" name="originalPassword" placeholder="Mot de passe">
-  </label>
-  <br>
+  <div class="inner-bg">
+    <div class="container">
 
-  <button>Me connecter</button>
-</form>
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text">
+          <h1>Connexion &amp; Inscription</h1>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-5">
+
+          <div class="form-box">
+            <div class="form-top">
+              <div class="form-top-left">
+                <h3>Se connecter</h3>
+                <p>Entrer votre email & mot de passe pour vous connecter:</p>
+              </div>
+              <div class="form-top-right">
+                <i class="fa fa-lock"></i>
+              </div>
+            </div>
+            <div class="form-bottom">
+              <form role="form" action="/process-login" method="POST" class="login-form">
+                <div class="form-group">
+                  <label class="sr-only" for="form-username">Email</label>
+                  <input type="text" name="email" placeholder="Email" class="form-username form-control" id="form-username">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="form-password">Mot de passe</label>
+                  <input type="password" name="originalPassword" placeholder="Mot de passe..." class="form-password form-control"
+                    id="form-password">
+                </div>
+                <button class="btn">Se connecter!</button>
+              </form>
+            </div>
+          </div>
+
+          {{!-- <div class="social-login">
+            <h3>...or login with:</h3>
+            <div class="social-login-buttons">
+              <a class="btn btn-link-2" href="#">
+                <i class="fa fa-facebook"></i> Facebook
+              </a>
+              <a class="btn btn-link-2" href="#">
+                <i class="fa fa-twitter"></i> Twitter
+              </a>
+              <a class="btn btn-link-2" href="#">
+                <i class="fa fa-google-plus"></i> Google Plus
+              </a>
+            </div>
+          </div> --}}
+
+        </div>
+
+        <div class="col-sm-1 middle-border"></div>
+        <div class="col-sm-1"></div>
+
+        <div class="col-sm-5">
+
+          <div class="form-box">
+            <div class="form-top">
+              <div class="form-top-left">
+                <h3>Vous inscrire maintenant</h3>
+                <p>Compléter le formulaire ci-dessous pour vous inscrire:</p>
+              </div>
+              <div class="form-top-right">
+                <i class="fa fa-pencil"></i>
+              </div>
+            </div>
+            <div class="form-bottom">
+              <form role="form" action="/process-signup" method="POST" class="registration-form">
+                <div class="form-group">
+                  <label class="sr-only" for="form-first-name">Nom</label>
+                  <input type="text" name="lastname" placeholder="Nom" class="form-first-name form-control" id="form-first-name">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="form-last-name">Prénom</label>
+                  <input type="text" name="firstname" placeholder="Prénom" class="form-last-name form-control" id="form-last-name">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="form-email">Email</label>
+                  <input type="email" name="email" placeholder="Email..." class="form-email form-control" id="form-email">
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="form-email">Mot de passe</label>
+                  <input type="password" name="originalPassword" placeholder="Mot de passe..." class="form-email form-control"
+                    id="form-email">
+                </div>
+                <button class="btn">Je m'inscris!</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

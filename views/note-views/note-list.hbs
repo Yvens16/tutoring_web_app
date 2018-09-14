@@ -1,10 +1,6 @@
-<h2>Mes cours</h2>
+<h2 style="color: white">Mes cours</h2>
 
-{{> flash_messages}}
-
-<a href="/note/add">Ajouter un nouveau cours</a>
-
-<ul>
+{{!-- <ul>
   {{#each noteArray}}
   <li>
     <h4>{{this.topic}}</h4>
@@ -13,6 +9,44 @@
   </li>
   {{else}}
   <p>Tu n'as pas encore créé de cours.</p>
-  <a href="/note/add">Ajoute ton premier cours</a>
+  <a href="/note-add">Ajoute ton premier cours</a>
   {{/each}}
-</ul>
+</ul> --}}
+
+{{> flash_messages}}
+<a href="/note-add"><button type="button" style="margin-bottom: 50px" class="btn btn-outline-primary">Ajouter un
+    nouveau cours</button></a>
+
+<div class="row">
+  {{#each noteArray}}
+  <div id="grid-list-cours" class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{this.topic}}</h5>
+        <p class="card-text">{{this.title}}</p>
+        <a href="/note/{{this._id}}" class="btn btn-primary">Afficher le cours</a>
+      </div>
+    </div>
+  </div>
+  {{else}}
+  <p style="color: white; margin-left: auto; margin-right:auto"><strong> Tu n'as pas encore créé de cours.</strong></p>
+  {{/each}}
+  {{!-- <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div> --}}
+</div>

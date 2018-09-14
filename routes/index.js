@@ -13,7 +13,7 @@ router.get("/", (req, res, next) => {
 router.get("/settings", (req, res, next) => {
   if (!req.user) {
     req.flash("error", "Tu dois être connecté pour accéder à tes paramètres");
-    res.redirect("/login");
+    res.redirect("/signup");
   } else {
     res.render("settings-page");
   }

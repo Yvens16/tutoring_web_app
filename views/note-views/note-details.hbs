@@ -1,12 +1,38 @@
 {{> flash_messages}}
 
+
+<a href="/note"><button type="button" style="margin-bottom: 50px" class="btn btn-outline-primary">Revenir à la liste
+    des cours</button></a>
+
+<div id="details-cours" class="card" style="width: 60rem;">
+  <div class="card-body">
+    <h5 class="card-title" style="font-size: 20px">{{noteItem.topic}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 15px">{{noteItem.title}}</h6>
+    <p class="card-text" style="margin-bottom: 0">{{noteItem.noteCours}}</p>
+    <p style="font-size: 12px; margin-bottom: 0"><a href="{{noteItem.noteFile}}" class="card-link" target="_blank"><i
+          class="fa fa-cloud" style="font-size:15px;"></i></a>
+      Visualiser le cours</p>
+    <p style="font-size: 10px; margin-bottom: 0">Ajouté {{noteItem.created}}</p>
+    <p style="font-size: 10px; margin-bottom: 0">Dernière modification : {{noteItem.updated}}</p>
+
+    <a style="font-size: 10px" href="/note/{{noteItem._id}}/edit" class="btn btn-info" role="button">Modifier ce cours</a>
+    <a style="font-size: 10px" href="/note/{{noteItem._id}}/delete" class="btn btn-info" role="button">Supprimer ce
+      cours</a>
+    {{!-- <a style="font-size: 10px" href="/note/{{noteItem._id}}/edit">Modifier ce cours</a> --}}
+    {{!-- <a style="font-size: 10px" href="/note/{{noteItem._id}}/delete">Supprimer ce cours</a> --}}
+
+  </div>
+</div>
+<div style="height: 200px"></div>
+{{!--
 <h2>{{noteItem.topic}}</h2>
 
 <h3>{{noteItem.title}}</h3>
 
 <p>{{noteItem.noteCours}}</p>
 
-<p><a href="{{noteItem.noteFile}}"><i class="fa fa-cloud" style="font-size:36px;"></i></a> Cliquer pour visualiser le cours</p>
+<p><a href="{{noteItem.noteFile}}"><i class="fa fa-cloud" style="font-size:36px;"></i></a> Cliquer pour visualiser le
+  cours</p>
 
 <p>Ajouté {{noteItem.created}}</p>
 
@@ -14,4 +40,4 @@
 
 <a href="/note/{{noteItem._id}}/edit">Modifier ce cours</a>
 <br>
-<a href="/note/{{noteItem._id}}/delete">Supprimer ce cours</a>
+<a href="/note/{{noteItem._id}}/delete">Supprimer ce cours</a> --}}

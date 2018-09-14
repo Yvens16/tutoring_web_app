@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/note", (req, res, next) => {
   if (!req.user) {
     req.flash("error", "Tu dois te connecter pour voir tes cours 😓");
-    res.redirect("/login");
+    res.redirect("/signup");
     return;
   }
 
@@ -23,10 +23,10 @@ router.get("/note", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.get("/note/add", (req, res, next) => {
+router.get("/note-add", (req, res, next) => {
   if (!req.user) {
     req.flash("error", "Tu dois te connecter pour ajouter un cours 😓");
-    res.redirect("/login");
+    res.redirect("/signup");
   } else {
     res.render("note-views/note-form.hbs");
   }
@@ -48,7 +48,7 @@ router.post(
     topic = upperCaseFirst(topic);
     Note.create({ title, topic, noteCours, noteFile, student })
       .then(noteDoc => {
-        req.flash("success", "Cours ajouté avec succès 😍");
+        req.flash("success", "Cours ajouté avec succès ✔️");
         res.redirect("/note");
       })
       .catch(err => next(err));
@@ -75,6 +75,7 @@ router.get("/note/:noteId/edit", (req, res, next) => {
 
   Note.findById(noteId)
     .then(noteDoc => {
+      console.log(noteDoc);
       // send the database results (1) to the template as "noteItem"
       res.locals.noteItem = noteDoc;
       res.render("note-views/note-edit.hbs");
@@ -94,7 +95,7 @@ router.post("/note/:noteId/process-edit", (req, res, next) => {
     .then(noteBook => {
       // redirect if it's successful to avoid duplicating the submission
       // redirect ONLY to URLs - "/books/$bookId" instead of "book-list.hbs"
-      req.flash("success", "Ton cours a bien été modifié");
+      req.flash("success", "Ton cours a bien été modifié 👌");
       res.redirect(`/note/${noteId}`);
     })
     .catch(err => next(err));
@@ -107,7 +108,7 @@ router.get("/note/:noteId/delete", (req, res, next) => {
     .then(noteBook => {
       // redirect if it's successful to avoid duplicating the submission
       // redirect ONLY to URLs - "/note" instead of "note-list.hbs"
-      req.flash("success", "Ton cours a bien été supprimé");
+      req.flash("success", "Ton cours a bien été supprimé 👌");
       res.redirect("/note");
     })
     .catch(err => next(err));

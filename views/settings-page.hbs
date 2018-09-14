@@ -1,6 +1,58 @@
-<h2>Modifier mon compte</h2>
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2 text">
+    <h1 style="color: white">Modifier mes coordonnées</h1>
+  </div>
 
-<form action="/process-settings" method="POST">
+</div>
+
+
+<div class="row">
+  <div class="contact-us">
+    <div class="form-box">
+      <div class="form-top">
+        <div class="form-top-left">
+          <p>Entrer votre nom & email puis votre message:</p>
+        </div>
+        <div class="form-top-right">
+          <span class="glyphicon glyphicon-wrench"></span>
+        </div>
+      </div>
+      <div class="form-bottom">
+        <form role="form" action="/process-settings" method="POST" class="login-form">
+          <div class="form-group">
+            <label class="sr-only" for="form-username">Nom</label>
+            <input type="text" name="lastname" placeholder="Votre nom" value="{{currentUser.lastname}}" class="form-username form-control"
+              id="form-username">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="form-username">Prénom</label>
+            <input type="text" name="firstname" placeholder="Votre prénom" value="{{currentUser.firstname}}" class="form-username form-control"
+              id="form-username">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="form-username">Numéro de portable du tuteur</label>
+            <input type="text" name="phoneparent" value="{{currentUser.phoneparent}}" placeholder="N° d'un parent ou responsable légal"
+              value="{{currentUser.phoneparent}}" class="form-username form-control" id="form-username">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="form-username">Numéro de portable du tuteur</label>
+            <input type="text" name="phonestudent" value="{{currentUser.phonestudent}}" placeholder="N° de l'élève"
+              value="{{currentUser.phonestudent}}" class="form-username form-control" id="form-username">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="form-username">Votre Email</label>
+            <input type="email" name="email" value="{{currentUser.email}}" placeholder="Email" class="form-username form-control"
+              id="form-username">
+          </div>
+          <button class="btn">Sauvegarder les changements</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{!-- <form action="/process-settings" method="POST">
   <label>
     Nom:
     <input type="text" name="lastname" value="{{currentUser.lastname}}" placeholder="Nom">
@@ -28,4 +80,4 @@
   <br>
 
   <button>Sauvegarder les changements</button>
-</form>
+</form> --}}

@@ -1,22 +1,22 @@
-<h2>Rechercher un utilisateur</h2>
+<h2 style="color: white">Rechercher un utilisateur</h2>
+
+<div id="searchbar" class="input-group mb-3">
+  <form action="/process-search" method="POST">
+    <input type="search" name="searchItem" style="height:50px" class="form-control" placeholder="'Yvens, 'Belaston' ou 'email@exemple.com'">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary">Chercher</button>
+    </div>
+  </form>
+</div>
 
 {{> flash_messages}}
 
-<form action="/process-search" method="POST">
-  <label>
-    Taper un nom, prénom ou email:
-    <input type="search" name="searchItem" placeholder="'Yvens, 'Belaston' ou 'email@exemple.com'">
-    <button>Chercher</button>
-  </label>
-  <br>
-</form>
-
-<ul>
+<div class="list-group">
   {{#each userResult}}
-  <li>
-    <h4>
-      <a href="/user/{{this._id}}/details">{{this.firstname}} {{this.lastname}}</a>
-    </h4>
-  </li>
+  <a href="/user/{{this._id}}/details" class="list-group-item list-group-item-action">
+    {{this.firstname}} {{this.lastname}}
+  </a>
   {{/each}}
-</ul>
+</div>
+
+<div style="height:280px;"></div>

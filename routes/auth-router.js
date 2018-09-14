@@ -34,7 +34,7 @@ router.post("/process-signup", (req, res, next) => {
     encryptedPassword
   })
     .then(userDoc => {
-      req.flash("success", "Inscription réussie");
+      // req.flash("success", "Inscription réussie ✌️");
       req.logIn(userDoc, () => {
         req.flash("success", "Connexion réussie ✌️");
         res.redirect("/");
@@ -52,16 +52,17 @@ router.post("/process-login", (req, res, next) => {
 
   User.findOne({ email: { $eq: email } })
     .then(userDoc => {
+      console.log(userDoc);
       if (!userDoc) {
-        req.flash("error", "Oups! L'email est incorrect...");
-        res.redirect("/login");
+        req.flash("error", "Oups! L'email est incorrect 😨");
+        res.redirect("/signup");
         return;
       }
       const { encryptedPassword } = userDoc;
 
       if (!bcrypt.compareSync(originalPassword, encryptedPassword)) {
-        req.flash("error", "Oups! Le mot de passe est incorrect...");
-        res.redirect("/login");
+        req.flash("error", "Oups! Le mot de passe est incorrect 😨");
+        res.redirect("/signup");
         return;
       }
       req.logIn(userDoc, () => {
@@ -76,7 +77,7 @@ router.get("/logout", (req, res, next) => {
   // "req.logOut()" is a Passport method that removes the user ID from session
   req.logOut();
   // save a flash message to display in the login page
-  req.flash("success", "Décconnexion réussie");
+  req.flash("success", "Décconnexion réussie ✔️");
   res.redirect("/");
 });
 
@@ -99,7 +100,7 @@ router.post("/process-search", (req, res, next) => {
       console.log("USERDOC HERE", userDoc);
       if (userDoc.length < 1) {
         console.log("NO RESULT");
-        req.flash("error", "Aucun élève trouvé");
+        req.flash("error", "Aucun élève trouvé 🤷");
         res.redirect("/search");
         return;
       } else {
