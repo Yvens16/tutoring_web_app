@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const fileUploader = require("../config/file-uploader.js");
 const nodemailer = require("nodemailer");
 
 const User = require("../models/user-model.js");

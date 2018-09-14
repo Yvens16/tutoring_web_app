@@ -83,23 +83,32 @@ router.get("/note/:noteId/edit", (req, res, next) => {
     .catch(err => next(err));
 });
 
-router.post("/note/:noteId/process-edit", (req, res, next) => {
-  const { noteId } = req.params;
-  const { topic, title, noteCours } = req.body;
-
-  Note.findByIdAndUpdate(
-    noteId, // which document(s)?
-    { $set: { topic, title, noteCours } }, // what changes?
-    { runValidators: true } // additionnal settings
-  )
-    .then(noteBook => {
-      // redirect if it's successful to avoid duplicating the submission
-      // redirect ONLY to URLs - "/books/$bookId" instead of "book-list.hbs"
-      req.flash("success", "Ton cours a bien été modifié 👌");
-      res.redirect(`/note/${noteId}`);
-    })
-    .catch(err => next(err));
-});
+router.post(
+  "/note/:noteId/process-edit",
+  fileUploader.single("noteFileUpload"),
+  (req, res, next) => {
+    const { noteId } = req.params;
+    const { topic, title, noteCours } = req.body;
+    let changes = { topic, title, noteCours };
+    let noteFile;
+    if (req.file) {
+      noteFile = req.file.secure_url;
+      changes.noteFile = noteFile;
+    }
+    Note.findByIdAndUpdate(
+      noteId, // which document(s)?
+      { $set: changes }, // what changes?
+      { runValidators: true } // additionnal settings
+    )
+      .then(noteBook => {
+        // redirect if it's successful to avoid duplicating the submission
+        // redirect ONLY to URLs - "/books/$bookId" instead of "book-list.hbs"
+        req.flash("success", "Ton cours a bien été modifié 👌");
+        res.redirect(`/note/${noteId}`);
+      })
+      .catch(err => next(err));
+  }
+);
 
 router.get("/note/:noteId/delete", (req, res, next) => {
   const { noteId } = req.params;
